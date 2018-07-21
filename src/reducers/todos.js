@@ -1,7 +1,4 @@
-// import deepFreeze from 'deep-freeze'
-// import expect from 'expect'
-const deepFreeze = require('deep-freeze')
-const expect = require('expect')
+const redux = require('redux')
 
 const todo = (state, action) => {
   switch (action.type) {
@@ -38,68 +35,52 @@ const todos = (state = [], action) => {
   }
 }
 
-const testAddTodo = () => {
-  const stateBefore = []
-  const action = {
-    type: 'ADD_TODO',
-    id: 0,
-    text: 'Learn Redux'
+const visibilityFitler = (state = 'SHOW_ALL', action) => {
+  switch (action.type) {
+    case 'SET_VISIBILITY_FILTER':
+      return action.filter
+    default:
+      return state
   }
-  const stateAfter = [{
-    id: 0,
-    text: 'Learn Redux',
-    completed: false
-  }]
-
-  deepFreeze(stateBefore)
-  deepFreeze(action)
-
-  expect(
-    todos(stateBefore, action)
-  ).toEqual(stateAfter)
 }
 
-const testToggleTodo = () => {
-  const stateBefore = [
-    {
-      id: 0,
-      text: 'Learn Redux',
-      completed: false
-    },
-    {
-      id: 1,
-      text: 'Do something',
-      completed: false
-    }
-  ]
-
-  const action = {
-    type: 'TOGGLE_TODO',
-    id: 1
+const todoApp = (state = {}, action) => {
+  return {
+    todos: todos(state.todos, action),
+    visibilityFitler: visibilityFitler(state.visibilityFitler, action)
   }
-
-  const stateAfter = [
-    {
-      id: 0,
-      text: 'Learn Redux',
-      completed: false
-    },
-    {
-      id: 1,
-      text: 'Do something',
-      completed: true
-    }
-  ]
-
-  deepFreeze(stateBefore)
-  deepFreeze(action)
-
-  expect(
-    todos(stateBefore, action)
-  ).toEqual(stateAfter)
 }
 
-testAddTodo()
-testToggleTodo()
+const { createStore } = redux
+const store = createStore(todoApp)
 
-console.log('All tests have passed')
+console.log('Initial state:\n', store.getState(), '\n----------')
+console.log('Dispatching ADD_TODO')
+store.dispatch({
+  type: 'ADD_TODO',
+  id: 0,
+  text: 'Learn redux'
+})
+console.log('Current state:\n', store.getState(), '\n----------')
+
+console.log('Dispatching ADD_TODO')
+store.dispatch({
+  type: 'ADD_TODO',
+  id: 1,
+  text: 'Do something'
+})
+console.log('Current state:\n', store.getState(), '\n----------')
+
+console.log('Dispatching TOGGLE_TODO')
+store.dispatch({
+  type: 'TOGGLE_TODO',
+  id: 1
+})
+console.log('Current state:\n', store.getState(), '\n----------')
+
+console.log('Dispatching SET_VISIBILITY_FILTER')
+store.dispatch({
+  type: 'SET_VISIBILITY_FILTER',
+  filter: 'SHOW_COMPLETED'
+})
+console.log('Current state:\n', store.getState(), '\n----------')
