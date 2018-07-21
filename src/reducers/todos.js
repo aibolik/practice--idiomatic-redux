@@ -44,14 +44,11 @@ const visibilityFitler = (state = 'SHOW_ALL', action) => {
   }
 }
 
-const todoApp = (state = {}, action) => {
-  return {
-    todos: todos(state.todos, action),
-    visibilityFitler: visibilityFitler(state.visibilityFitler, action)
-  }
-}
-
-const { createStore } = redux
+const { createStore, combineReducers } = redux
+const todoApp = combineReducers({
+  todos,
+  visibilityFitler
+})
 const store = createStore(todoApp)
 
 console.log('Initial state:\n', store.getState(), '\n----------')
