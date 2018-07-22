@@ -1,4 +1,4 @@
-const redux = require('redux')
+import { createStore as createReduxStore, combineReducers } from 'redux'
 
 const todo = (state, action) => {
   switch (action.type) {
@@ -44,40 +44,12 @@ const visibilityFitler = (state = 'SHOW_ALL', action) => {
   }
 }
 
-const { createStore, combineReducers } = redux
-const todoApp = combineReducers({
+export const todoAppReducer = combineReducers({
   todos,
   visibilityFitler
 })
-const store = createStore(todoApp)
 
-console.log('Initial state:\n', store.getState(), '\n----------')
-console.log('Dispatching ADD_TODO')
-store.dispatch({
-  type: 'ADD_TODO',
-  id: 0,
-  text: 'Learn redux'
-})
-console.log('Current state:\n', store.getState(), '\n----------')
+export default (reducer) => {
+  return createReduxStore(reducer)
+}
 
-console.log('Dispatching ADD_TODO')
-store.dispatch({
-  type: 'ADD_TODO',
-  id: 1,
-  text: 'Do something'
-})
-console.log('Current state:\n', store.getState(), '\n----------')
-
-console.log('Dispatching TOGGLE_TODO')
-store.dispatch({
-  type: 'TOGGLE_TODO',
-  id: 1
-})
-console.log('Current state:\n', store.getState(), '\n----------')
-
-console.log('Dispatching SET_VISIBILITY_FILTER')
-store.dispatch({
-  type: 'SET_VISIBILITY_FILTER',
-  filter: 'SHOW_COMPLETED'
-})
-console.log('Current state:\n', store.getState(), '\n----------')
