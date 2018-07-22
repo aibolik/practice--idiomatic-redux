@@ -1,7 +1,7 @@
 import React from 'react'
 
 const FilterLink = ({ 
-  store, 
+  onClick,
   filter,
   currentFilter,
   children 
@@ -12,10 +12,10 @@ const FilterLink = ({
 
   return (
     <a href='#'
-      onClick={() => store.dispatch({
-        type: 'SET_VISIBILITY_FILTER',
-        filter
-      })}>
+      onClick={e => {
+        e.preventDefault()
+        onClick(filter)
+      }}>
       {children}
     </a>
   )
