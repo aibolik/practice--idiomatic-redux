@@ -35,7 +35,7 @@ const todos = (state = [], action) => {
   }
 }
 
-const visibilityFitler = (state = 'SHOW_ALL', action) => {
+const visibilityFilter = (state = 'SHOW_ALL', action) => {
   switch (action.type) {
     case 'SET_VISIBILITY_FILTER':
       return action.filter
@@ -46,7 +46,7 @@ const visibilityFitler = (state = 'SHOW_ALL', action) => {
 
 export const todoAppReducer = combineReducers({
   todos,
-  visibilityFitler
+  visibilityFilter
 })
 
 export default (reducer) => {

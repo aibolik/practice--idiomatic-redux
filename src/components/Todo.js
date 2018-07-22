@@ -8,7 +8,7 @@ const Todo = ({
   <li 
     onClick={onClick}
     style={{
-      textDecoration: completed ? 'line-throught' : 'none'
+      textDecoration: completed ? 'line-through' : 'none'
     }}
   >
     {text}
