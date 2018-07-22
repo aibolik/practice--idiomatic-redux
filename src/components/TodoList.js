@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Todo from './Todo'
 
 const getVisibleTodos = (todos, visibilityFilter) => {
@@ -27,7 +28,7 @@ const TodoList = ({ todos, onTodoClick }) => (
  */
 class VisibleTodoList extends Component {
   componentDidMount() {
-    const { store } = this.props
+    const { store } = this.context
     this.unsubscribe = store.subscribe(() => {
       this.forceUpdate()
     })
@@ -39,7 +40,7 @@ class VisibleTodoList extends Component {
 
   render() {
     const props = this.props
-    const { store } = props
+    const { store } = this.context
     const state = store.getState()
 
     return (
@@ -56,6 +57,9 @@ class VisibleTodoList extends Component {
       />
     )
   }
+}
+VisibleTodoList.contextTypes = {
+  store: PropTypes.object
 }
 
 export default VisibleTodoList

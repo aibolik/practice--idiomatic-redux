@@ -5,9 +5,9 @@ import AddTodo from './components/AddTodo'
 
 const TodoApp = ({ store }) => (
   <div>
-    <AddTodo store={store} />
-    <VisibleTodoList store={store} />
-    <Footer store={store} />
+    <AddTodo />
+    <VisibleTodoList />
+    <Footer />
   </div>
 )
 
