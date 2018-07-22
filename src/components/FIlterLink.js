@@ -20,6 +20,10 @@ const Link = ({
   )
 }
 
+/**
+ * Actually this is Container component,
+ * so it should be inside another folder
+ */
 class FilterLink extends Component {
   componentDidMount() {
     this.unsubscribe = store.subscribe(() => {
