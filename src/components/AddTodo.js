@@ -1,7 +1,7 @@
 import React from 'react'
 
 let nextTodoId = 0
-const AddTodo = () => {
+const AddTodo = ({ store }) => {
   let input
 
   return (
