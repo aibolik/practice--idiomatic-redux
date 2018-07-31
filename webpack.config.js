@@ -5,7 +5,8 @@ module.exports = {
   entry: path.resolve(__dirname, 'src/index.js'),
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/'
   },
   mode: 'development',
   devServer: {
@@ -21,8 +22,5 @@ module.exports = {
         loader: 'babel-loader'
       }
     ]
-  },
-  plugins: [
-    new HtmlWebpackPlugin({ template: 'src/index.html' })
-  ]
+  }
 }
