@@ -34,3 +34,16 @@ const todos = (state = [], action) => {
 }
 
 export default todos
+
+
+export const getVisibleTodos = (state, visibilityFilter) => {
+  if (visibilityFilter === 'all') {
+    return state
+  }
+  if (visibilityFilter === 'completed') {
+    return state.filter(t => t.completed)
+  }
+  if (visibilityFilter === 'active') {
+    return state.filter(t => !t.completed)
+  }
+}
