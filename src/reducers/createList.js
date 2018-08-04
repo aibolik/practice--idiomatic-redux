@@ -34,6 +34,5 @@ export default createList
 
 export const getIds = state => state.ids
 export const getIsFetching = state => { 
-  console.log('isFetching', state)
   return state.isFetching 
 }
