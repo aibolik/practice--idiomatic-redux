@@ -45,3 +45,24 @@ export const fetchTodos = (filter) => {
     }
   })
 }
+
+export const addTodo = (text) => {
+  return delay(500).then(() => {
+    const todo = {
+      id: v4(),
+      text,
+      completed: false
+    }
+
+    fakeDatabase.push(todo)
+    return todo
+  })
+}
+
+export const toggleTodo = (id) => {
+  return delay(500).then(() => {
+    const todo = fakeDatabase.filter(todo => todo.id === id)
+    todo.completed = !todo.completed
+    return todo
+  })
+}
